@@ -1,13 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+
+
+const initialFormValues = {
+    //dropdown
+    size: '',
+    //radio buttons
+    sauce: '',
+    //checkboxes
+    cheese: false,
+    pepperoni: false,
+    anchovies: false,
+    sausage: false,
+    mushrooms: false,
+    peppers: false,
+    //text input
+    specialInstructions:''
+}
+
+
+
 
 function Form () {
+    // STATES //
+    // const [friends, setFriends] = useState(initialFriends)          // array of friend objects
+    const [formValues, setFormValues] = useState(initialFormValues) // object
+    // const [formErrors, setFormErrors] = useState(initialFormErrors) // object
+    // const [disabled, setDisabled] = useState(initialDisabled)       // boolean
+
+    // EVENT HANDLERS //
+    const onChange = (name, value) => {
+        setFormValues({
+            ...formValues,
+            [name]: value
+        })
+      }
+
     
     return (
         <div>
             <h3>Build Your Own Pizza!</h3>
             <form>
                 <label>Choice Of Size
-                    <select name='size'>
+                    <select
+                        name='size'
+                        onChange={onChange}
+                        value={formValues.size}
+                        >
                     <option value=''>-- Select a size --</option>
                     <option value='Small'>Small</option>
                     <option value='Medium'>Medium</option>
@@ -19,46 +58,46 @@ function Form () {
                 <label>Original Red
                     <input 
                     type='radio'
-                    name='civil'
+                    name='sauce'
                     value='Original Red'
-                    // onChange={onChange}
-                    // checked={values.civil === 'single'}
+                    onChange={onChange}
+                    checked={formValues.sauce === 'Original Red'}
                     />
                 </label>
         
                 <label>Garlic Ranch
                     <input
                     type='radio'
-                    name='civil'
+                    name='sauce'
                     value='Garlic Ranch'
-                    // onChange={onChange}
-                    // checked={values.civil === 'married'}
+                    onChange={onChange}
+                    checked={formValues.sauce === 'Garlic Ranch'}
                     />
                 </label>
                 <label>BBQ Sauce
                     <input 
                     type='radio'
-                    name='civil'
+                    name='sauce'
                     value='BBQ Sauce'
-                    // onChange={onChange}
-                    // checked={values.civil === 'single'}
+                    onChange={onChange}
+                    checked={formValues.sauce === 'BBQ Sauce'}
                     />
                 </label>
         
                 <label>Spinach Alfredo
                     <input
                     type='radio'
-                    name='civil'
+                    name='sauce'
                     value='Spinach Alfredo'
-                    // onChange={onChange}
-                    // checked={values.civil === 'married'}
+                    onChange={onChange}
+                    checked={formValues.sauce === 'Spinach Alfredo'}
                     />
                 </label>
             <h3>Add Toppings</h3>
                 <label>Cheese
                     <input 
                     type='checkbox'
-                    name='Cheese'
+                    name='cheese'
                     // checked={values.hiking}
                     // onChange={onChange}
                     />
@@ -67,7 +106,7 @@ function Form () {
                 <label>Pepperoni
                     <input 
                     type='checkbox'
-                    name='Pepperoni'
+                    name='pepperoni'
                     // checked={values.reading}
                     // onChange={onChange}
                     />
@@ -76,7 +115,7 @@ function Form () {
                 <label>Anchovies
                     <input 
                     type='checkbox'
-                    name='Anchovies'
+                    name='anchovies'
                     // checked={values.coding}
                     // onChange={onChange}
                     />
@@ -84,7 +123,7 @@ function Form () {
                 <label>Sausage
                     <input 
                     type='checkbox'
-                    name='Sausage'
+                    name='sausage'
                     // checked={values.hiking}
                     // onChange={onChange}
                     />
@@ -93,7 +132,7 @@ function Form () {
                 <label>Mushrooms
                     <input 
                     type='checkbox'
-                    name='Mushrooms'
+                    name='mushrooms'
                     // checked={values.coding}
                     // onChange={onChange}
                     />
@@ -101,13 +140,24 @@ function Form () {
                 <label>Peppers
                     <input 
                     type='checkbox'
-                    name='Peppers'
+                    name='peppers'
                     // checked={values.coding}
                     // onChange={onChange}
                     />
                 </label>
                     
-
+                <label>Email
+            <h3>Any Special Instructions?</h3>
+                <input 
+                    // value={values.specialInstructions}
+                    // onChange={onChange}
+                    name='specialInstructions'
+                    type='text'
+                    />
+                </label>
+                <br></br>
+                <br></br>
+                <button>Submit</button>
             </form>
         </div>
     )
