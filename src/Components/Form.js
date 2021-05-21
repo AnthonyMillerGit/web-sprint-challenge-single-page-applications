@@ -29,6 +29,22 @@ function Form () {
     // const [formErrors, setFormErrors] = useState(initialFormErrors) // object
     // const [disabled, setDisabled] = useState(initialDisabled)       // boolean
 
+    // HELPERS //
+    const postNewOrder = newOrder => {
+        axios.post("notarealsite.com", newOrder)
+        .then(res => {
+            setPizzaOrder([...pizzaOrder, res.data])
+            console.log(pizzaOrder)
+        })
+        .catch(err => {
+            console.log(`NO PIZZA FOR YOU ${err}`)
+        })
+        setFormValues(initialFormValues)
+    }
+
+
+
+
     // EVENT HANDLERS //
 
     const inputChange = (name, value) => {
@@ -49,7 +65,9 @@ function Form () {
             sauce: formValues.sauce.trim(),
             specialInstructions: formValues.specialInstructions.trim(),
         }
+        postNewOrder(newPizzaOrder)
     }
+
     const onSubmit = evt => {
         evt.preventDefault()
         formSubmit()
