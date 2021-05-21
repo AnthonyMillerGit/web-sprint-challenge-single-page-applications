@@ -18,12 +18,13 @@ const initialFormValues = {
     specialInstructions:''
 }
 
+const initialPizzaOrder = []
 
 
 
 function Form () {
     // STATES //
-    // const [friends, setFriends] = useState(initialFriends)          // array of friend objects
+    const [pizzaOrder, setPizzaOrder] = useState(initialPizzaOrder)
     const [formValues, setFormValues] = useState(initialFormValues) // object
     // const [formErrors, setFormErrors] = useState(initialFormErrors) // object
     // const [disabled, setDisabled] = useState(initialDisabled)       // boolean
@@ -42,11 +43,23 @@ function Form () {
         inputChange(name, valueToUse)
     }
 
+    const formSubmit = () => {
+        const newPizzaOrder = {
+            size: formValues.size,
+            sauce: formValues.sauce.trim(),
+            specialInstructions: formValues.specialInstructions.trim(),
+        }
+    }
+    const onSubmit = evt => {
+        evt.preventDefault()
+        formSubmit()
+    }
+    
     
     return (
         <div>
             <h3>Build Your Own Pizza!</h3>
-            <form>
+            <form onSubmit={onSubmit}>
                 <label>Choice Of Size
                     <select
                         onChange={onChange}
@@ -151,8 +164,6 @@ function Form () {
                     onChange={onChange}
                     />
                 </label>
-                    
-                <label>Email
             <h3>Any Special Instructions?</h3>
                 <input 
                     value={formValues.specialInstructions}
@@ -160,10 +171,9 @@ function Form () {
                     name='specialInstructions'
                     type='text'
                     />
-                </label>
                 <br></br>
                 <br></br>
-                <button>Submit</button>
+                <button onClick={onSubmit}>Submit</button>
             </form>
         </div>
     )
