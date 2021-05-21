@@ -29,12 +29,18 @@ function Form () {
     // const [disabled, setDisabled] = useState(initialDisabled)       // boolean
 
     // EVENT HANDLERS //
-    const onChange = (name, value) => {
+
+    const inputChange = (name, value) => {
         setFormValues({
             ...formValues,
             [name]: value
         })
-      }
+    }
+    const onChange = evt => {
+        const { name, value, checked, type } = evt.target
+        const valueToUse = type === 'checkbox' ? checked : value
+        inputChange(name, valueToUse)
+    }
 
     
     return (
@@ -43,9 +49,9 @@ function Form () {
             <form>
                 <label>Choice Of Size
                     <select
-                        name='size'
                         onChange={onChange}
                         value={formValues.size}
+                        name='size'
                         >
                     <option value=''>-- Select a size --</option>
                     <option value='Small'>Small</option>
@@ -98,8 +104,8 @@ function Form () {
                     <input 
                     type='checkbox'
                     name='cheese'
-                    // checked={values.hiking}
-                    // onChange={onChange}
+                    checked={formValues.cheese}
+                    onChange={onChange}
                     />
                 </label>
         
@@ -107,8 +113,8 @@ function Form () {
                     <input 
                     type='checkbox'
                     name='pepperoni'
-                    // checked={values.reading}
-                    // onChange={onChange}
+                    checked={formValues.pepperoni}
+                    onChange={onChange}
                     />
                 </label>
         
@@ -116,16 +122,16 @@ function Form () {
                     <input 
                     type='checkbox'
                     name='anchovies'
-                    // checked={values.coding}
-                    // onChange={onChange}
+                    checked={formValues.anchovies}
+                    onChange={onChange}
                     />
                 </label>
                 <label>Sausage
                     <input 
                     type='checkbox'
                     name='sausage'
-                    // checked={values.hiking}
-                    // onChange={onChange}
+                    checked={formValues.sausage}
+                    onChange={onChange}
                     />
                 </label>
         
@@ -133,24 +139,24 @@ function Form () {
                     <input 
                     type='checkbox'
                     name='mushrooms'
-                    // checked={values.coding}
-                    // onChange={onChange}
+                    checked={formValues.mushrooms}
+                    onChange={onChange}
                     />
                 </label>
                 <label>Peppers
                     <input 
                     type='checkbox'
                     name='peppers'
-                    // checked={values.coding}
-                    // onChange={onChange}
+                    checked={formValues.peppers}
+                    onChange={onChange}
                     />
                 </label>
                     
                 <label>Email
             <h3>Any Special Instructions?</h3>
                 <input 
-                    // value={values.specialInstructions}
-                    // onChange={onChange}
+                    value={formValues.specialInstructions}
+                    onChange={onChange}
                     name='specialInstructions'
                     type='text'
                     />
