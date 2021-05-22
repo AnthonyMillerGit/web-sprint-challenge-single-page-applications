@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import {useHistory} from 'react-router-dom'
 
 
 const initialFormValues = {
@@ -74,7 +75,13 @@ function Form () {
         formSubmit()
     }
     
+    const history = useHistory()
     
+    const completeOrder = () => {
+        history.push('/Confirm')
+    }
+
+
     return (
         <div>
             <h3>Build Your Own Pizza!</h3>
@@ -192,7 +199,7 @@ function Form () {
                     />
                 <br></br>
                 <br></br>
-                <button onClick={onSubmit}>Submit</button>
+                <button onClick={completeOrder}>Submit</button>
             </form>
         </div>
     )
