@@ -64,6 +64,7 @@ function Form () {
             size: formValues.size,
             sauce: formValues.sauce.trim(),
             specialInstructions: formValues.specialInstructions.trim(),
+            toppings: ['cheese', 'pepperoni', 'anchovies', 'sausage', 'mushrooms', 'peppers'].filter(topping => formValues[topping])
         }
         postNewOrder(newPizzaOrder)
     }
